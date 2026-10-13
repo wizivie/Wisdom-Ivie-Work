@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Grey-first palette. Accents are neutral greys; contrast carried by weight and type. */
+:root {
+  --bg: #f4f4f2;
+  --surface: #ffffff;
+  --surface-raised: #ebebe8;
+  --text: #19191c;
+  --text-muted: #5c5c64;
+  --line: rgba(25, 25, 28, 0.12);
+  --accent: #74747c;
+  --accent-strong: #3d3d44;
+  --ink: #1b1b1e;
+  --ink-text: #f2f2f0;
+  --ink-muted: #a3a3ab;
+  --ink-line: rgba(242, 242, 240, 0.14);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121214;
+    --surface: #19191c;
+    --surface-raised: #222226;
+    --text: #f2f2f0;
+    --text-muted: #a3a3ab;
+    --line: rgba(242, 242, 240, 0.12);
+    --accent: #a3a3ab;
+    --accent-strong: #d4d4d8;
+    --ink: #0b0b0c;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Type scale */
+.text-display {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(3.25rem, 8vw, 6.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.text-hero {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+.text-section {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+.text-eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.text-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.text-body {
+  color: var(--text-muted);
+  max-width: 64ch;
+  line-height: 1.7;
+}
+
+/* Entrance */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Post typography */
+.prose-post {
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  max-width: 66ch;
+}
+.prose-post .lead {
+  font-family: var(--font-serif), Georgia, serif;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1.45;
+  margin-bottom: 2.5rem;
+}
+.prose-post h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  color: var(--text);
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin-top: 3.25rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.prose-post h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+.prose-post p {
+  margin: 0 0 1.25rem;
+}
+.prose-post ul,
+.prose-post ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.4rem;
+}
+.prose-post ul {
+  list-style: square;
+}
+.prose-post li {
+  margin-bottom: 0.55rem;
+}
+.prose-post li::marker {
+  color: var(--accent);
+}
+.prose-post strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose-post em {
+  color: var(--text);
+}
+.prose-post a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.prose-post blockquote {
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.prose-post code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.86em;
+  background: var(--surface-raised);
+  padding: 0.12em 0.38em;
+  border-radius: 3px;
+  color: var(--text);
+}
+.prose-post pre {
+  background: var(--ink);
+  color: var(--ink-text);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0 2rem;
+}
+.prose-post pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.82em;
+  line-height: 1.65;
+  color: inherit;
+}
+.prose-post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+  font-size: 0.92rem;
+}
+.prose-post th,
+.prose-post td {
+  text-align: left;
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.prose-post th {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.prose-post td:first-child {
+  color: var(--text);
+}
+
+/* Print / PDF: the CV sheet becomes the page */
+@media print {
+  @page {
+    size: A4;
+    margin: 9mm 12mm;
+  }
+  :root {
+    color-scheme: light;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+  }
+  .skip-link {
+    display: none;
+  }
+  a {
+    text-decoration: none;
+  }
+}
